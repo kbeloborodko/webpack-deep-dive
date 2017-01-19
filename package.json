@@ -19,6 +19,7 @@
   "scripts": {
     "validate": "npm run lint",
     "start": "http-server --silent -c-1",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:dev": "webpack"
   }
 }
