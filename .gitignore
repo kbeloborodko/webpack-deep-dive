@@ -1,16 +1,4 @@
-# WebStorm specific files
-.idea/
-
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Coverage directory used by tools like istanbul
-coverage
-
-# nyc test coverage
-.nyc_output
-
-# Node modules
 node_modules
+coverage/
+dist
+.opt-in
