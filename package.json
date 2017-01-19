@@ -19,10 +19,11 @@
     }
   },
   "scripts": {
-    "dev": "webpack-dev-server",
-    "validate": "npm run lint",
     "start": "http-server --silent -c-1",
+    "build": "webpack -p",
+    "build:dev": "webpack",
+    "dev": "webpack-dev-server",
     "lint": "eslint .",
-    "build:dev": "webpack"
+    "validate": "npm run lint"
   }
 }
