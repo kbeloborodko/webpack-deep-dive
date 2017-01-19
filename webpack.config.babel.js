@@ -9,6 +9,7 @@ module.exports = () => {
       path: resolve('dist'),
       filename: 'bundle.js',
       publicPath: '/dist/'
-    }
+    },
+    devtool: 'eval'
   });
 }
