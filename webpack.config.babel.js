@@ -6,7 +6,9 @@ module.exports = () => {
     context: resolve('src'),
     entry: './bootstrap.js',
     output: {
-      filename: 'bundle.js'
+      path: resolve('dist'),
+      filename: 'bundle.js',
+      publicPath: '/dist/'
     }
   });
 }
