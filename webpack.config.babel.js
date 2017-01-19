@@ -10,6 +10,6 @@ module.exports = () => {
       filename: 'bundle.js',
       publicPath: '/dist/'
     },
-    devtool: 'eval'
+    devtool: env.prod ? 'source-map' : 'eval'
   });
 }
