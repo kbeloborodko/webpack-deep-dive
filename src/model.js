@@ -1,5 +1,7 @@
 'use strict'
 
+module.exports = Model
+
 /**
  * Creates a new Model instance and hooks up the storage.
  *
@@ -19,7 +21,7 @@ function Model(storage) {
 Model.prototype.create = function(title, callback) {
   title = title || ''
   callback = callback || function() {
-  }
+    }
 
   var newItem = {
     title: title.trim(),
@@ -47,7 +49,7 @@ Model.prototype.create = function(title, callback) {
 Model.prototype.read = function(query, callback) {
   var queryType = typeof query
   callback = callback || function() {
-  }
+    }
 
   if (queryType === 'function') {
     callback = query
@@ -114,7 +116,3 @@ Model.prototype.getCount = function(callback) {
     callback(todos)
   })
 }
-
-// Export to window
-window.app = window.app || {}
-window.app.Model = Model

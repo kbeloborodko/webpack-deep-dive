@@ -1,5 +1,7 @@
 'use strict'
 
+module.exports = Store
+
 /**
  * Creates a new client side storage object and will create an empty
  * collection if no collection already exists.
@@ -10,7 +12,7 @@
  */
 function Store(name, callback) {
   callback = callback || function() {
-  }
+    }
 
   this._dbName = name
 
@@ -34,9 +36,9 @@ function Store(name, callback) {
  *
  * @example
  * db.find({foo: 'bar', hello: 'world'}, function (data) {
- *	 // data will return any items that have foo: bar and
- *	 // hello: world in their properties
- * });
+*	 // data will return any items that have foo: bar and
+*	 // hello: world in their properties
+* });
  */
 Store.prototype.find = function(query, callback) {
   if (!callback) {
@@ -62,7 +64,7 @@ Store.prototype.find = function(query, callback) {
  */
 Store.prototype.findAll = function(callback) {
   callback = callback || function() {
-  }
+    }
   callback.call(this, JSON.parse(localStorage[this._dbName]).todos)
 }
 
@@ -79,7 +81,7 @@ Store.prototype.save = function(updateData, callback, id) {
   var todos = data.todos
 
   callback = callback || function() {
-  }
+    }
 
   // If an ID was actually given, find the item and update each property
   if (id) {
@@ -136,7 +138,3 @@ Store.prototype.drop = function(callback) {
   localStorage[this._dbName] = JSON.stringify({todos: []})
   callback.call(this, JSON.parse(localStorage[this._dbName]).todos)
 }
-
-// Export to window
-window.app = window.app || {}
-window.app.Store = Store
