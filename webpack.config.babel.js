@@ -4,7 +4,7 @@ const {resolve} = require('path');
 const {getIfUtils} = require('webpack-config-utils');
 
 module.exports = env => {
-  const {ifProd, ifNotProd} = getIfUtils(env)
+  const {ifProd, ifNotProd} = getIfUtils(env);
 
   const config = webpackValidator({
     context: resolve('src'),
@@ -12,9 +12,16 @@ module.exports = env => {
     output: {
       path: resolve('dist'),
       filename: 'bundle.js',
-      publicPath: '/dist/'
+      publicPath: '/dist/',
+      pathinfo: ifNotProd()
     },
-    devtool: ifProd('source-map', 'eval')
+    devtool: ifProd('source-map', 'eval'),
+    module: {
+      loaders: [
+        {test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/},
+        {test: /\.css$/, loaders: ['style-loader', 'css-loader']}
+      ]
+    }
   });
 
   if (env.debug) {
