@@ -33,7 +33,7 @@
     "build": "webpack -p --env.prod",
     "prebuild:dev": "rimraf dist",
     "build:dev": "webpack --env.dev",
-    "dev": "webpack-dev-server --env.dev",
+    "dev": "webpack-dev-server --env.dev --hot",
     "lint": "eslint .",
     "validate": "npm run lint"
   }
