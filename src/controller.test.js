@@ -1,7 +1,7 @@
-const Controller = require('./controller');
+import Controller from './controller'
 
-describe('test', () => {
-  it('works', () => {
-    expect(Controller).to.exist;
-  });
-});
+describe('controller', () => {
+  it('exists', () => {
+    expect(Controller).to.exist
+  })
+})

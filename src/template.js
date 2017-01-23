@@ -1,4 +1,4 @@
-module.exports = Template
+export default Template
 
 var htmlEscapes = {
   '&': '&amp;',
@@ -17,9 +17,11 @@ var reUnescapedHtml = /[&<>"'`]/g
 var reHasUnescapedHtml = new RegExp(reUnescapedHtml.source)
 
 var escape = function(string) {
-  return (string && reHasUnescapedHtml.test(string)) ?
-    string.replace(reUnescapedHtml, escapeHtmlChar) :
-    string
+  if (string && reHasUnescapedHtml.test(string)) {
+    return string.replace(reUnescapedHtml, escapeHtmlChar)
+  } else {
+    return string
+  }
 }
 
 /**
@@ -28,13 +30,15 @@ var escape = function(string) {
  * @constructor
  */
 function Template() {
-  this.defaultTemplate = '<li data-id="{{id}}" class="{{completed}}">' +
-    '<div class="view">' +
-    '<input class="toggle" type="checkbox" {{checked}}>' +
-    '<label>{{title}}</label>' +
-    '<button class="destroy"></button>' +
-    '</div>' +
-    '</li>'
+  this.defaultTemplate = `
+    <li data-id="{{id}}" class="{{completed}}">
+      <div class="view">
+        <input class="toggle" type="checkbox" {{checked}} />
+        <label>{{title}}</label>
+        <button class="destroy"></button>
+      </div>
+    </li>
+  `
 }
 
 /**
@@ -49,10 +53,10 @@ function Template() {
  *
  * @example
  * view.show({
-*	id: 1,
-*	title: "Hello World",
-*	completed: 0,
-* });
+ *  id: 1,
+ *  title: "Hello World",
+ *  completed: 0,
+ * });
  */
 Template.prototype.show = function(data) {
   var i, l
