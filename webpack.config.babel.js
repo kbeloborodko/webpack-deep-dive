@@ -1,18 +1,17 @@
 /* eslint no-console:"off" */
-process.env.BABEL_ENV = 'test';
-const webpackValidator = require('webpack-validator');
 const {resolve} = require('path');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const webpackValidator = require('webpack-validator');
 const {getIfUtils} = require('webpack-config-utils');
 
 module.exports = env => {
   const {ifProd, ifNotProd} = getIfUtils(env);
-
   const config = webpackValidator({
     context: resolve('src'),
     entry: './bootstrap.js',
     output: {
-      path: resolve('dist'),
       filename: 'bundle.js',
+      path: resolve('dist'),
       publicPath: '/dist/',
       pathinfo: ifNotProd()
     },
@@ -22,13 +21,14 @@ module.exports = env => {
         {test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/},
         {test: /\.css$/, loaders: ['style-loader', 'css-loader']}
       ]
-    }
-  });
-
+    },
+    plugins: [
+      new ProgressBarPlugin()
+    ],
+  })
   if (env.debug) {
-    console.log(debug);
-    debugger; // eslint-disable-line
+    console.log(config);
+    debugger // eslint-disable-line
   }
-
-  return config;
+  return config
 }
