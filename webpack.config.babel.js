@@ -1,4 +1,5 @@
 /* eslint no-console:"off" */
+process.env.BABEL_ENV = 'test';
 const webpackValidator = require('webpack-validator');
 const {resolve} = require('path');
 const {getIfUtils} = require('webpack-config-utils');

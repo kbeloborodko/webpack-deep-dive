@@ -10,7 +10,14 @@ module.exports = config => {
       [fileGlob]: ['webpack']
     },
     webpack: webpackConfig,
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+    coverageReporter: {
+      reporters: [
+        {type: 'lcov', dir: 'coverage/', subdir: '.'},
+        {type: 'json', dir: 'coverage/', subdir: '.'},
+        {type: 'text-summary'}
+      ]
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
