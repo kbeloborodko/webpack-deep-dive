@@ -1,6 +1,7 @@
 /* eslint no-console:"off" */
 const webpack = require('webpack');
 const {resolve} = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const webpackValidator = require('webpack-validator');
 const {getIfUtils, removeEmpty} = require('webpack-config-utils');
@@ -14,9 +15,8 @@ module.exports = env => {
       vendor: ['todomvc-app-css/index.css']
     },
     output: {
-      filename: 'bundle.[name].js',
+      filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js'),
       path: resolve('dist'),
-      publicPath: '/dist/',
       pathinfo: ifNotProd()
     },
     devtool: ifProd('source-map', 'eval'),
@@ -30,7 +30,11 @@ module.exports = env => {
       new ProgressBarPlugin(),
       ifProd(new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor'
-      }))
+      })),
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        inject: 'head'
+      })
     ])
   });
   if (env.debug) {
