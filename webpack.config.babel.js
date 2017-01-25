@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const {resolve} = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const webpackValidator = require('webpack-validator');
-const {getIfUtils} = require('webpack-config-utils');
+const {getIfUtils, removeEmpty} = require('webpack-config-utils');
 
 module.exports = env => {
   const {ifProd, ifNotProd} = getIfUtils(env);
@@ -26,12 +26,12 @@ module.exports = env => {
         {test: /\.css$/, loaders: ['style-loader', 'css-loader']}
       ]
     },
-    plugins: [
+    plugins: removeEmpty([
       new ProgressBarPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
+      ifProd(new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor'
-      })
-    ]
+      }))
+    ])
   });
   if (env.debug) {
     console.log(config);
