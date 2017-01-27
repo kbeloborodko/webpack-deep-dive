@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const webpackValidator = require('webpack-validator');
 const {getIfUtils, removeEmpty} = require('webpack-config-utils');
 
@@ -44,6 +45,12 @@ module.exports = env => {
       new HtmlWebpackPlugin({
         template: './index.html',
         inject: 'head'
+      }),
+      new OfflinePlugin(),
+      new webpack.DefinePlugin({
+        'process_env': {
+          NODE_ENV: ifProd('"production"', '"development"')
+        }
       })
     ])
   });

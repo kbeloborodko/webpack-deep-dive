@@ -34,6 +34,7 @@
     "karma-webpack": "^2.0.1",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
+    "offline-plugin": "^4.5.5",
     "opt-cli": "^1.5.1",
     "progress-bar-webpack-plugin": "^1.9.3",
     "rimraf": "^2.5.4",
